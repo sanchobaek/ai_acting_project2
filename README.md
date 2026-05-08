@@ -59,6 +59,46 @@ VIDEO_SOURCES=chief::https://버킷.s3.amazonaws.com/chief.mp4::https://버킷.s
 
 ---
 
+## 1.5단계: VIDEO_SOURCES 설정
+
+앱 화면에 표시되는 참조 영상 목록은 `.env`의 `VIDEO_SOURCES`로 관리합니다.
+
+### 형식
+
+```
+이름::영상URL::썸네일URL
+```
+
+- 항목 구분: 콤마(`,`)
+- 항목 내 필드 구분: 이중 콜론(`::`)
+- `이름`: UI에 표시되는 레이블
+- `영상URL`: S3에 업로드된 `.mp4` URL
+- `썸네일URL`: S3에 업로드된 `.png` 또는 `.jpg` URL
+
+### 예시
+
+```env
+VIDEO_SOURCES=chief::https://버킷.s3.amazonaws.com/chief.mp4::https://버킷.s3.amazonaws.com/chief.png,deputy::https://버킷.s3.amazonaws.com/deputy.mp4::https://버킷.s3.amazonaws.com/deputy.png
+```
+
+### 새 참조 영상 추가 순서
+
+1. S3에 `.mp4`와 썸네일 이미지(`.png`) 업로드
+2. S3 URL 복사
+3. `.env`의 `VIDEO_SOURCES` 끝에 `,새이름::영상URL::썸네일URL` 추가
+4. 백엔드 재시작 (아래 참고)
+
+```bash
+# 백엔드 재시작
+ps aux | grep uvicorn
+kill <PID>
+nohup uvicorn main:app --host 0.0.0.0 --port 3000 &
+```
+
+> **주의:** 콤마나 `::` 앞뒤에 공백이 들어가면 인식되지 않습니다.
+
+---
+
 ## 2단계: 참조 영상 및 썸네일 S3 업로드
 
 참조 영상(`.mp4`)과 썸네일 이미지(`.png`)를 S3 버킷에 업로드합니다.
