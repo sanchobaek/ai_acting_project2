@@ -66,7 +66,7 @@ VITE_API_URL=http://[EC2-퍼블릭-IP]:3000
 cd frontend
 npm install
 npm run build
-# 생성된 dist 폴더의 모든 파일을 S3 버킷에 업로드
+# 생성된 build 폴더의 모든 파일을 S3 버킷에 업로드
 ```
 
 ---
