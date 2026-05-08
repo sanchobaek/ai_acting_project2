@@ -12,10 +12,10 @@
 
 EC2 인스턴스에 접속한 후 아래 순서대로 진행하세요.
 
-### 1. 필수 패키지 설치 (Git, Python, Pip)
+### 1. 필수 패키지 설치 (Git, Python, Pip, Node.js)
 ```bash
 sudo dnf update -y
-sudo dnf install git python3 python3-pip -y
+sudo dnf install git python3 python3-pip nodejs -y
 ```
 
 ### 2. ffmpeg 설치 (비디오 처리 필수)
@@ -58,7 +58,7 @@ nohup uvicorn main:app --host 0.0.0.0 --port 3000 &
 ### 1. 환경 변수 설정 (로컬 PC에서 작업)
 `frontend/.env` 파일을 생성하고 EC2의 퍼블릭 IP를 입력합니다.
 ```
-VITE_API_URL=http://[EC2-퍼블릭-IP]:3000
+REACT_APP_API_URL=http://[EC2-퍼블릭-IP]:3000
 ```
 
 ### 2. 빌드 및 S3 업로드
@@ -80,7 +80,7 @@ npm run build
 ```
 ai-acting-studio/
 ├── backend/            # Python FastAPI 서버
-├── frontend/           # React (Vite) 프론트엔드
+├── frontend/           # React 프론트엔드 (CRA 스타일)
 ├── server.js           # Node.js 통합 서버 (선택 사항)
 └── .env                # API 키 및 설정
 ```
