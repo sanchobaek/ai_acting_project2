@@ -145,13 +145,20 @@ function VideoGenerator({ onResult, onTaskCreated }) {
                   onChange={() => setSelectedVideo(src.url)}
                 />
                 <div className="video-radio-content">
-                  <video
-                    src={src.url}
-                    poster={src.thumbnail || undefined}
-                    muted
-                    preload="metadata"
-                    style={{ width: '100%', borderRadius: '6px', display: 'block' }}
-                  />
+                  {src.thumbnail ? (
+                    <img
+                      src={src.thumbnail}
+                      alt={src.label}
+                      style={{ width: '100%', borderRadius: '6px', display: 'block' }}
+                    />
+                  ) : (
+                    <video
+                      src={src.url}
+                      muted
+                      preload="metadata"
+                      style={{ width: '100%', borderRadius: '6px', display: 'block' }}
+                    />
+                  )}
                   <span className="video-radio-label">{src.label}</span>
                 </div>
               </label>
